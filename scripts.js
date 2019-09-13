@@ -36,16 +36,16 @@ request.onload = function(){
             h1.textContent = character.name
 
             // cria p e define texto a partir da descricao do filme
-            const p = document.createElement('p')
-            character.nickname = character.nickname.substring(0,300) //max 300 chars
-            p.textContent = `${character.nickname}...`
+            const h2 = document.createElement('p')
+            character.nickname = character.nickname //.substring(0,300) //max 300 chars
+            h2.textContent = `${character.nickname}...`
 
             // associa cards ao container
             container.appendChild(card)
 
             // associa a toda card um h1 e um p
             card.appendChild(h1)
-            card.appendChild(p)
+            card.appendChild(h2)
 
         });    
     } else{
