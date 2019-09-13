@@ -4,7 +4,7 @@ console.log(app)
 // cria imagem vazia
 const logo = document.createElement('img')
 // preenche imagem
-logo.src = 'logo.png'
+logo.src = 'logo1.png'
 // cria container
 const container = document.createElement('div')
 container.setAttribute('class','container')
@@ -33,12 +33,15 @@ request.onload = function(){
 
             // cria h1 e define texto a partir dos dados do filme
             const h1 = document.createElement('h1')
-            h1.textContent = character.name
+            h1.textContent = 'Nome: ' + character.name 
 
             // cria p e define texto a partir da descricao do filme
-            const h2 = document.createElement('p')
-            character.nickname = character.nickname //.substring(0,300) //max 300 chars
-            h2.textContent = `${character.nickname}...`
+            const h2 = document.createElement('h2')
+            //character.nickname = character.nickname //.substring(0,300) //max 300 chars
+            h2.textContent = `Apelido: ${character.nickname}`
+
+            const p = document.createElement('p')
+            p.textContent = 'Ocupação: '+ character.occupation
 
             // associa cards ao container
             container.appendChild(card)
@@ -46,6 +49,7 @@ request.onload = function(){
             // associa a toda card um h1 e um p
             card.appendChild(h1)
             card.appendChild(h2)
+            card.appendChild(p)
 
         });    
     } else{
@@ -56,4 +60,26 @@ request.onload = function(){
 }    
 request.send()
 
+// funcao responsavel por realizar buscar atraves do nome do personagem
+function filtroBusca () {
+    // declaracao de variaveis locais
+    var input, filter, tabela, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    tabela = app.card;
+    tr = tabela.getElementsByTagName("tr");
+
+    // busca em todas a linhas da tabela e esconde linhas nao correspondentes
+    for(i=0; i < tr.length; i++){
+        td = tr[i].getElementsByTagName("td")[0];
+        if(td){
+            txtValue = td.textContent || td.innerText;
+            if(txtValue.toUpperCase().indexOf(filter) > -1 ) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
 
